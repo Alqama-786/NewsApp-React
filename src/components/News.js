@@ -10,10 +10,6 @@ const News = (props) => {
   const [Page, setPage] = useState(1);
   const [TotalResults, setTotalResults] = useState(0);
 
-  // document.title = `${Capitalize(
-  //   props.Category
-  // )} - News Application`;
-
   const Capitalize = (String) => {
     return String.charAt(0).toUpperCase() + String.slice(1);
   };
@@ -25,7 +21,6 @@ const News = (props) => {
     let data = await fetch(url);
     props.ProgressFunction(30);
     let JsonData = await data.json();
-    console.log(JsonData);
     props.ProgressFunction(70);
     setArticles(JsonData.articles);
     setTotalResults(JsonData.totalResults);
@@ -34,6 +29,7 @@ const News = (props) => {
   };
 
   useEffect(() => {
+    document.title = `${Capitalize(props.Category)} - News Application`;
     UpdateNews();
     // eslint-disable-next-line
   }, []);
